@@ -8,7 +8,7 @@ Live uptime monitor and status page for [noelmc.online](https://noelmc.online), 
 | GitHub Pages fallback | https://noel9812.github.io/Website-Uptime |
 | JSON API | https://status.noelmc.online/api/status.json |
 
-[![Uptime CI](https://github.com/Noel9812/Website-Uptime/actions/workflows/upptime.yml/badge.svg)](https://github.com/Noel9812/Website-Uptime/actions)
+[![Uptime CI](https://github.com/Noel9812/Website-Uptime/actions/workflows/uptime.yml/badge.svg)](https://github.com/Noel9812/Website-Uptime/actions)
 
 ## What this repo does
 
@@ -19,7 +19,7 @@ Live uptime monitor and status page for [noelmc.online](https://noelmc.online), 
 | `gh-pages` branch | Generated status website + graphs + history |
 | `api/` | JSON consumed by the portfolio footer |
 
-Compared to a full Upptime clone (reference), this repo starts as **config-only**. History, graphs, and `api/` appear after the first successful workflow runs.
+This repository deliberately uses Upptime's maintained monitor action rather than committing generated history. The first successful workflow creates the status history, graphs, and JSON API on `gh-pages`.
 
 ## Portfolio integration
 
@@ -46,6 +46,10 @@ Icons use `https://noelmc.online/favicon.svg`.
 2. **General → Features**: enable Issues (required for incident issues)
 3. **General → Pull Requests**: leave defaults
 4. Default branch: `master`
+5. Set repository metadata:
+   - Description: `Synthetic uptime monitoring and public status page for noelmc.online`
+   - Website: `https://status.noelmc.online`
+   - Topics: `upptime`, `uptime`, `status-page`, `monitoring`, `github-actions`
 
 ### 2. Personal Access Token secret
 
