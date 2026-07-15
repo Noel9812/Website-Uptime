@@ -1,23 +1,35 @@
 # https://upptime.js.org
-owner: YOUR_GITHUB_USERNAME
-repo: status
+owner: Noel9812
+repo: Website-Uptime
+user-agent: Noel9812-Upptime
 
 sites:
   - name: Portfolio
-    url: https://YOUR_PORTFOLIO_DOMAIN/
+    url: https://noelmc.online/
+    icon: https://noelmc.online/favicon.svg
+    maxResponseTime: 5000
+
+  - name: Portfolio WWW
+    url: https://www.noelmc.online/
+    icon: https://noelmc.online/favicon.svg
+    maxResponseTime: 5000
 
 status-website:
-  # Published by Upptime to GitHub Pages
-  cname: ""
-  name: Systems Status
-  introTitle: "Operational status"
-  introMessage: Live availability for Noel Mathews' engineering portfolio and related services.
+  # Optional custom domain for GitHub Pages — configure DNS CNAME → Noel9812.github.io
+  cname: status.noelmc.online
+  name: Noel Mathews · Status
+  introTitle: Operational status
+  introMessage: Live availability for noelmc.online and related services.
   theme: dark
+  favicon: https://noelmc.online/favicon.svg
+  logoUrl: https://noelmc.online/images/logo.svg
   navbar:
     - title: Status
       href: /
     - title: Portfolio
-      href: https://YOUR_PORTFOLIO_DOMAIN/
+      href: https://noelmc.online/
+    - title: GitHub
+      href: https://github.com/Noel9812/Website-Uptime
 
 workflowSchedule:
   graphs: "0 0 * * *"

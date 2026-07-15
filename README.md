@@ -1,58 +1,115 @@
-# Status monitor (Upptime)
+# Noel Mathews — Systems Status
 
-This folder is a **starter for a separate GitHub repository** that publishes
-a live status page and a machine-readable `status.json` for the portfolio footer.
+Live uptime monitor and status page for [noelmc.online](https://noelmc.online), powered by [Upptime](https://upptime.js.org).
 
-## Why a separate repo?
+| Surface | URL |
+|---------|-----|
+| Status site | https://status.noelmc.online |
+| GitHub Pages fallback | https://noel9812.github.io/Website-Uptime |
+| JSON API | https://status.noelmc.online/api/status.json |
 
-- Isolates monitoring workflows from the portfolio app
-- Publishes cleanly to GitHub Pages at `https://<user>.github.io/<status-repo>/`
-- Keeps secrets and cron schedules out of the marketing site build
+[![Uptime CI](https://github.com/Noel9812/Website-Uptime/actions/workflows/upptime.yml/badge.svg)](https://github.com/Noel9812/Website-Uptime/actions)
 
-## Setup
+## What this repo does
 
-1. Create a new GitHub repository (e.g. `status` or `portfolio-status`).
-2. Copy the contents of this folder into that repository root.
-3. Enable **GitHub Pages** from the `gh-pages` branch (Upptime creates it).
-4. In repository **Settings → Secrets**, add:
-   - `GH_PAT` — personal access token with `repo` scope (Upptime requirement)
-5. Edit `.upptimerc.yml`:
-   - Set `owner` / `repo`
-   - Set `sites[].url` to your live portfolio / API endpoints
-6. Push to `main`. Upptime Actions will generate the status site.
+| Mechanism | Role |
+|-----------|------|
+| GitHub Actions | Synthetic HTTPS checks every 5 minutes |
+| Issues | Opened/closed automatically on outages |
+| `gh-pages` branch | Generated status website + graphs + history |
+| `api/` | JSON consumed by the portfolio footer |
+
+Compared to a full Upptime clone (reference), this repo starts as **config-only**. History, graphs, and `api/` appear after the first successful workflow runs.
 
 ## Portfolio integration
 
-In Decap CMS → **Footer** → **Status URL**, set either:
-
-- Status site root: `https://<user>.github.io/<status-repo>/`
-  (portfolio fetches `/api/status.json`)
-- Or a direct JSON URL if you host a custom endpoint
-
-The portfolio footer (`useOperationalStatus`) maps responses to:
-
-| Level | UI label |
-|-------|----------|
-| operational | Systems operational |
-| degraded | Partial degradation |
-| down | Service disruption |
-| unknown | Status unknown / View operational status |
-
-Leave `statusUrl` empty until the status site is live — the footer shows “Status unavailable” without hardcoding green.
-
-## Recommended endpoints to monitor
-
-- Portfolio home (Cloudflare Pages URL)
-- `/admin/` (optional — CMS shell availability)
-- Cusdis / Formspree if you want third-party dependency visibility
-
-## Local mock (optional)
-
-For local development without Upptime, you can temporarily point `statusUrl` at
-any JSON that matches:
-
-```json
-{ "status": "operational" }
+```
+content/settings/footer.yml → statusUrl: https://status.noelmc.online
 ```
 
-or an array of `{ "status": "up" | "down" }` entries (Upptime live format).
+The portfolio composable `useOperationalStatus` fetches `/api/status.json`. Never hardcode green.
+
+## Monitored endpoints
+
+Defined in `.upptimerc.yml`:
+
+- `https://noelmc.online/`
+- `https://www.noelmc.online/`
+
+Icons use `https://noelmc.online/favicon.svg`.
+
+## Manual GitHub configuration (do in order)
+
+### 1. Repository settings
+
+1. Open https://github.com/Noel9812/Website-Uptime/settings
+2. **General → Features**: enable Issues (required for incident issues)
+3. **General → Pull Requests**: leave defaults
+4. Default branch: `master`
+
+### 2. Personal Access Token secret
+
+1. GitHub → **Settings → Developer settings → Fine-grained** (or classic) PAT  
+   - Classic: scopes `repo` + `workflow`  
+   - Fine-grained: this repo — Contents R/W, Issues R/W, Metadata R, Actions R/W, Pages R/W
+2. Repo → **Settings → Secrets and variables → Actions → New repository secret**
+3. Name: `GH_PAT`
+4. Value: the token
+
+### 3. Actions permissions
+
+1. **Settings → Actions → General**
+2. Allow Actions: **Allow all actions and reusable workflows**
+3. Workflow permissions: **Read and write permissions**
+4. Check **Allow GitHub Actions to create and approve pull requests** (Upptime updates content)
+5. Save
+
+### 4. Pages
+
+1. After the **first successful Upptime run**, a `gh-pages` branch will exist
+2. **Settings → Pages**
+3. Source: **Deploy from a branch**
+4. Branch: `gh-pages` / `/ (root)`
+5. Save
+6. Custom domain: `status.noelmc.online`
+7. Enforce HTTPS: enable once DNS propagates
+
+### 5. DNS (Cloudflare)
+
+1. Cloudflare DNS for `noelmc.online`
+2. Add CNAME: `status` → `noel9812.github.io` (proxied **or** DNS-only; HTTPS via GitHub Pages works best **DNS-only**/grey cloud initially, then orange-cloud if you prefer CF SSL)
+3. Wait for GitHub Pages to show domain active + certificate
+
+### 6. First run
+
+1. **Actions → Upptime → Run workflow**
+2. Confirm jobs succeed
+3. Confirm `gh-pages` has `index.html`, `api/`, `graphs/`, `history/`
+4. Open https://status.noelmc.online
+
+### 7. Branding verification
+
+In `.upptimerc.yml` already set:
+
+- `owner` / `repo`
+- Dark theme
+- Navbar → Portfolio + GitHub
+- Favicon + logo from `noelmc.online`
+
+### 8. Badges (README)
+
+The Actions badge at the top of this README auto-updates. Optional Upptime shields appear on the generated status site.
+
+## Schedule (from config)
+
+| Job | Cron |
+|-----|------|
+| Uptime | `*/5 * * * *` |
+| Response time | hourly |
+| Static site | hourly |
+| Graphs / summary | daily |
+
+## License
+
+- Powered by [Upptime](https://github.com/upptime/upptime)
+- Configuration © Noel Mathews
