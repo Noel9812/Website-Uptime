@@ -1,0 +1,25 @@
+name: Upptime
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  upptime:
+    name: Upptime
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GH_PAT }}
+      - name: Run updates
+        uses: upptime/uptime-monitor@v1.30.2
+        with:
+          secrets: ${{ toJson(secrets) }}
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}
