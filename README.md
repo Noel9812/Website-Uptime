@@ -2,22 +2,22 @@
 
 Live uptime monitor and status page for [noelmc.online](https://noelmc.online), powered by [Upptime](https://upptime.js.org).
 
-| Surface | URL |
-|---------|-----|
-| Status site | https://status.noelmc.online |
-| GitHub Pages fallback | https://noel9812.github.io/Website-Uptime |
-| JSON API | https://status.noelmc.online/api/status.json |
+| Surface               | URL                                          |
+| --------------------- | -------------------------------------------- |
+| Status site           | https://status.noelmc.online                 |
+| GitHub Pages fallback | https://noel9812.github.io/Website-Uptime    |
+| JSON API              | https://status.noelmc.online/api/status.json |
 
-[![Uptime CI](https://github.com/Noel9812/Website-Uptime/actions/workflows/uptime.yml/badge.svg)](https://github.com/Noel9812/Website-Uptime/actions)
+[![Uptime CI](https://github.com/Noel9812/Website-Uptime/workflows/Uptime%20CI/badge.svg)](https://github.com/Noel9812/Website-Uptime/actions/workflows/uptime.yml)
 
 ## What this repo does
 
-| Mechanism | Role |
-|-----------|------|
-| GitHub Actions | Synthetic HTTPS checks every 5 minutes |
-| Issues | Opened/closed automatically on outages |
+| Mechanism         | Role                                        |
+| ----------------- | ------------------------------------------- |
+| GitHub Actions    | Synthetic HTTPS checks every 5 minutes      |
+| Issues            | Opened/closed automatically on outages      |
 | `gh-pages` branch | Generated status website + graphs + history |
-| `api/` | JSON consumed by the portfolio footer |
+| `api/`            | JSON consumed by the portfolio footer       |
 
 This repository deliberately uses Upptime's maintained monitor action rather than committing generated history. The first successful workflow creates the status history, graphs, and JSON API on `gh-pages`.
 
@@ -53,8 +53,8 @@ Icons use `https://noelmc.online/favicon.svg`.
 
 ### 2. Personal Access Token secret
 
-1. GitHub → **Settings → Developer settings → Fine-grained** (or classic) PAT  
-   - Classic: scopes `repo` + `workflow`  
+1. GitHub → **Settings → Developer settings → Fine-grained** (or classic) PAT
+   - Classic: scopes `repo` + `workflow`
    - Fine-grained: this repo — Contents R/W, Issues R/W, Metadata R, Actions R/W, Pages R/W
 2. Repo → **Settings → Secrets and variables → Actions → New repository secret**
 3. Name: `GH_PAT`
@@ -106,12 +106,12 @@ The Actions badge at the top of this README auto-updates. Optional Upptime shiel
 
 ## Schedule (from config)
 
-| Job | Cron |
-|-----|------|
-| Uptime | `*/5 * * * *` |
-| Response time | hourly |
-| Static site | hourly |
-| Graphs / summary | daily |
+| Job              | Cron          |
+| ---------------- | ------------- |
+| Uptime           | `*/5 * * * *` |
+| Response time    | hourly        |
+| Static site      | hourly        |
+| Graphs / summary | daily         |
 
 ## License
 
