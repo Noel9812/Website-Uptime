@@ -4,18 +4,20 @@
     "url": "https://noelmc.online/",
     "icon": "https://noelmc.online/favicon.svg",
     "slug": "portfolio",
-    "status": "up",
+    "status": "down",
     "uptime": "100.00%",
-    "uptimeDay": "100.00%",
+    "uptimeDay": "99.98%",
     "uptimeWeek": "100.00%",
     "uptimeMonth": "100.00%",
     "uptimeYear": "100.00%",
     "time": 174,
-    "timeDay": 153,
-    "timeWeek": 188,
+    "timeDay": 157,
+    "timeWeek": 185,
     "timeMonth": 174,
     "timeYear": 174,
-    "dailyMinutesDown": {}
+    "dailyMinutesDown": {
+      "2026-07-31": 0
+    }
   },
   {
     "name": "Portfolio WWW",
@@ -29,12 +31,12 @@
     "uptimeMonth": "0.25%",
     "uptimeYear": "0.25%",
     "time": 45,
-    "timeDay": 49,
+    "timeDay": 51,
     "timeWeek": 45,
     "timeMonth": 45,
     "timeYear": 45,
     "dailyMinutesDown": {
-      "2026-07-31": 115,
+      "2026-07-31": 322,
       "2026-07-30": 1440,
       "2026-07-29": 1440,
       "2026-07-28": 1440,
